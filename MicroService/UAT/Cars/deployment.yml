@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+   name: cars
+   namespace: domiruth-uat-aks-ingress-basic
+spec:
+   replicas: 2
+   template:
+     metadata:
+       labels:
+         app: cars
+     spec:
+       containers:
+         - name: cars
+           image: domiruthcr.azurecr.io/cars:latest
+           ports:
+             - containerPort: 80
+             - containerPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+     name: cars
+     namespace: domiruth-uat-aks-ingress-basic
+spec:
+   ports:
+     - name: http
+       protocol: TCP
+       port: 80
+       targetPort: 80
+     - name: https
+       protocol: TCP
+       port: 443
+       targetPort: 443
+   selector:
+     app: cars
+   type: ClusterIP
