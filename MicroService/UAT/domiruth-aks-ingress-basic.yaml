@@ -52,4 +52,8 @@ spec:
       - backend:
           serviceName: visa
           servicePort: 80
-        path: /visa/(.*)    
+        path: /visa/(.*)
+      - backend:
+          serviceName: cars
+          servicePort: 80
+        path: /cars/(.*)        
