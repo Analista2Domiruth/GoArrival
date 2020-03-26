@@ -1,1 +1,40 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: notify
+spec:
+   selector:
+      matchLabels:
+         app: notify
+   replicas: 2
+   template:
+     metadata:
+       labels:
+         app: notify
+     spec:
+       containers:
+         - name: notify
+           image: domiruthcr.azurecr.io/notify:latest
+           ports:
+             - containerPort: 80
+             - containerPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+     name: notify
+     labels:
+      app: notify
+spec:
+   ports:
+     - name: http
+       protocol: TCP
+       port: 80
+       targetPort: 80
+     - name: https
+       protocol: TCP
+       port: 443
+       targetPort: 443
+   selector:
+     app: notify
+   type: LoadBalancer
