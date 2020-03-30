@@ -14,7 +14,7 @@ spec:
      spec:
        containers:
          - name: cars
-           image: domiruthcr.azurecr.io/cars:latest
+           image: domiruthcr.azurecr.io/cars:69
            ports:
              - containerPort: 80
              - containerPort: 443
